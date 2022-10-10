@@ -113,6 +113,16 @@
           <input v-model="whatsAppAPIProviderName" type="text" disabled />
         </label>
 
+        <label v-if="isAnXmppChannel" class="medium-9 columns settings-item">
+          {{ $t('INBOX_MGMT.ADD.XMPP.JID.LABEL') }}
+          <input v-model="jid" type="text" />
+        </label>
+
+        <label v-if="isAnXmppChannel" class="medium-9 columns settings-item">
+          {{ $t('INBOX_MGMT.ADD.XMPP.PASSWORD.UPDATE') }}
+          <input v-model="password" type="password" />
+        </label>
+
         <label class="w-3/4 pb-4">
           {{
             $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_GREETING_TOGGLE.LABEL')
@@ -655,6 +665,7 @@ export default {
         this.selectedInboxName = this.inbox.name;
         this.webhookUrl = this.inbox.webhook_url;
         this.greetingEnabled = this.inbox.greeting_enabled || false;
+        this.jid = this.inbox.jid;
         this.greetingMessage = this.inbox.greeting_message || '';
         this.emailCollectEnabled = this.inbox.enable_email_collect;
         this.csatSurveyEnabled = this.inbox.csat_survey_enabled;
@@ -700,9 +711,13 @@ export default {
             welcome_tagline: this.channelWelcomeTagline || '',
             selectedFeatureFlags: this.selectedFeatureFlags,
             reply_time: this.replyTime || 'in_a_few_minutes',
+            jid: this.jid,
             continuity_via_email: this.continuityViaEmail,
           },
         };
+        if (this.password) {
+          payload.channel.password = this.password;
+        }
         if (this.avatarFile) {
           payload.avatar = this.avatarFile;
         }

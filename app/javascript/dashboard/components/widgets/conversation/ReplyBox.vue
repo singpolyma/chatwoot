@@ -399,7 +399,8 @@ export default {
         this.isAnEmailChannel ||
         this.isASmsInbox ||
         this.isATelegramChannel ||
-        this.isALineChannel
+        this.isALineChannel ||
+        this.isAnXmppChannel
       );
     },
     replyButtonLabel() {
@@ -428,7 +429,9 @@ export default {
       );
     },
     isRichEditorEnabled() {
-      return this.isAWebWidgetInbox || this.isAnEmailChannel;
+      return (
+        this.isAWebWidgetInbox || this.isAnEmailChannel || this.isAnXmppChannel
+      );
     },
     showAudioRecorder() {
       return !this.isOnPrivateNote && this.showFileUpload;

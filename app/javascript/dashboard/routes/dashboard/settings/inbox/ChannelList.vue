@@ -60,6 +60,7 @@ export default {
         },
         { key: 'telegram', name: 'Telegram' },
         { key: 'line', name: 'Line' },
+        { key: 'xmpp', name: 'XMPP' },
       ];
     },
     ...mapGetters({

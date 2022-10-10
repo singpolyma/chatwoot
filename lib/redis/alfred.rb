@@ -53,6 +53,14 @@ module Redis::Alfred
       $alfred.with { |conn| conn.lpush(key, values) }
     end
 
+    def rpush(key, values)
+      $alfred.rpush(key, values)
+    end
+
+    def brpoplpush(source, destination)
+      $alfred.brpoplpush(source, destination, 0)
+    end
+
     def rpoplpush(source, destination)
       $alfred.with { |conn| conn.rpoplpush(source, destination) }
     end

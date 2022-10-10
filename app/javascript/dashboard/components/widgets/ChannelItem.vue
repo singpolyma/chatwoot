@@ -47,6 +47,7 @@ export default {
         'sms',
         'telegram',
         'line',
+        'xmpp',
       ].includes(key);
     },
   },
@@ -54,6 +55,9 @@ export default {
     getChannelThumbnail() {
       if (this.channel.key === 'api' && this.channel.thumbnail) {
         return this.channel.thumbnail;
+      }
+      if (this.channel.key === 'xmpp') {
+        return `/assets/images/dashboard/channels/xmpp.svg`;
       }
       return `/assets/images/dashboard/channels/${this.channel.key}.png`;
     },

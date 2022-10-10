@@ -85,6 +85,8 @@ gem 'administrate-field-belongs_to_search', '>= 0.9.0'
 gem 'wisper', '2.0.0'
 
 ##--- gems for channels ---##
+gem 'blather', git: 'https://github.com/singpolyma/blather', branch: 'allow-nested-client-xmlns'
+# TODO: bump up gem to 2.0
 gem 'facebook-messenger'
 gem 'line-bot-api'
 gem 'twilio-ruby', '~> 5.66'
