@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   else
     root to: 'dashboard#index'
 
+    # Constraint needs to be here so rails doesn't pull the ".com" off things as a format
+    get '/app/accounts/:account_id/contacts/email/:value', to: 'deeplink#email', constraints: { value: /[^\/]+/ }
+    get '/app/accounts/:account_id/contacts/phone_number/:value', to: 'deeplink#phone_number'
+    get '/app/accounts/:account_id/contacts/custom_attributes/:attribute/:value', to: 'deeplink#custom_attribute', constraints: { value: /[^\/]+/ }
     get '/app', to: 'dashboard#index'
     get '/app/*params', to: 'dashboard#index'
     get '/app/accounts/:account_id/settings/inboxes/new/twitter', to: 'dashboard#index', as: 'app_new_twitter_inbox'
