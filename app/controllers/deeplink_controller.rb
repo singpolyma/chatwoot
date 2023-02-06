@@ -3,20 +3,27 @@ class DeeplinkController < ActionController::Base
   before_action :fetch_account
 
   def email
-    contact = @account.contacts.find_by!(email: params[:value])
+    v = params[:value]
+    contact = @account.contacts.find_by(email: v)
+    contact ||= @account.contacts.create!(name: v, email: v)
     redirect_to "/app/accounts/#{@account.id}/contacts/#{contact.id}"
   end
 
   def phone_number
-    contact = @account.contacts.find_by!(phone_number: params[:value])
+    v = params[:value]
+    contact = @account.contacts.find_by(phone_number: v)
+    contact ||= @account.contacts.create!(name: v, phone_number: v)
     redirect_to "/app/accounts/#{@account.id}/contacts/#{contact.id}"
   end
 
   def custom_attribute
+    attr = params[:attribute]
+    v = params[:value]
     contact = @account.contacts
-      .where("custom_attributes->>? = ?", params[:attribute], params[:value])
+      .where("custom_attributes->>? = ?", attr, v)
       .first
-    raise ActiveRecord::RecordNotFound unless contact
+    contact ||= @account.contacts.create!(name: v, custom_attributes:
+      { attr.to_sym => v })
     redirect_to "/app/accounts/#{@account.id}/contacts/#{contact.id}"
   end
 
