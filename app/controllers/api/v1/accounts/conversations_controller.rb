@@ -177,12 +177,39 @@ class Api::V1::Accounts::ConversationsController < Api::V1::Accounts::BaseContro
     ).perform
   end
 
+  def conversation_params
+    additional_attributes = params[:additional_attributes]&.permit! || {}
+    additional_attributes.merge!(xmpp_attributes)
+    custom_attributes = params[:custom_attributes]&.permit! || {}
+    status = params[:status].present? ? { status: params[:status] } : {}
+
+    # TODO: temporary fallback for the old bot status in conversation, we will remove after couple of releases
+    status = { status: 'pending' } if status[:status] == 'bot'
+    {
+      account_id: Current.account.id,
+      inbox_id: @contact_inbox.inbox_id,
+      contact_id: @contact_inbox.contact_id,
+      contact_inbox_id: @contact_inbox.id,
+      additional_attributes: additional_attributes,
+      custom_attributes: custom_attributes,
+      snoozed_until: params[:snoozed_until],
+      assignee_id: params[:assignee_id],
+      team_id: params[:team_id]
+    }.merge(status)
+  end
+
   def conversation_finder
     @conversation_finder ||= ConversationFinder.new(Current.user, params)
   end
 
   def assignee?
     @conversation.assignee_id? && Current.user == @conversation.assignee
+  end
+
+  def xmpp_attributes
+    return {} unless @contact_inbox.inbox.xmpp?
+    return { type: "chat" } if @contact_inbox.conversations.empty?
+    { type: "chat", thread_id: SecureRandom.uuid }
   end
 end
 
