@@ -239,7 +239,9 @@
         },
         "API_CALLBACK": {
           "TITLE": "Callback URL",
-          "SUBTITLE": "You have to configure the webhook URL in facebook developer portal with the URL mentioned here."
+          "SUBTITLE": "You have to configure the webhook URL and the verification token in the Facebook Developer portal with the values shown below.",
+          "WEBHOOK_URL": "Webhook URL",
+          "WEBHOOK_VERIFICATION_TOKEN": "Webhook Verification Token"
         },
         "SUBMIT_BUTTON": "Create WhatsApp Channel",
         "API": {
@@ -325,6 +327,28 @@
           "ERROR_MESSAGE": "We were not able to save the telegram channel"
         }
       },
+      "XMPP": {
+        "TITLE": "XMPP Channel",
+        "DESC": "Integrate your Jabber/XMPP conversations.",
+        "CHANNEL_NAME": {
+          "LABEL": "Channel Name",
+          "PLACEHOLDER": "Please enter a channel name",
+          "ERROR": "This field is required"
+        },
+        "JID": {
+          "LABEL": "Jabber ID",
+          "PLACEHOLDER": "username@example.com"
+        },
+        "PASSWORD": {
+          "LABEL": "Password",
+          "UPDATE": "Update Password (or leave blank)",
+          "PLACEHOLDER": "Password"
+        },
+        "API": {
+          "ERROR_MESSAGE": "We were not able to save the XMPP channel"
+        },
+        "SUBMIT_BUTTON": "Create Channel"
+      },
       "AUTH": {
         "TITLE": "Choose a channel",
         "DESC": "Chatwoot supports live-chat widgets, Facebook Messenger, Twitter profiles, WhatsApp, Emails, etc., as channels. If you want to build a custom channel, you can create it using the API channel. To get started, choose one of the channels below."
@@ -357,7 +381,7 @@
     },
     "FINISH": {
       "TITLE": "Your Inbox is ready!",
-      "MESSAGE": "You can now engage with your customers through your new Channel. Happy supporting ",
+      "MESSAGE": "You can now engage with your customers through your new Channel. Happy supporting",
       "BUTTON_TEXT": "Take me there",
       "MORE_SETTINGS": "More settings",
       "WEBSITE_SUCCESS": "You have successfully finished creating a website channel. Copy the code shown below and paste it on your website. Next time a customer use the live chat, the conversation will automatically appear on your inbox."
